@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GoodTimes</string>
+    <string name="pick_date">Date</string>
+    <string name="new_good_time">What good thing happened today?</string>
+    <string name="submit_good_time">Submit</string>
+    <string name="database_exists">database_exists</string>
+    <string name="get_good_time">Get Good Time</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="manage_good_times">Manage Good Times</string>
+    <string name="title_activity_manage_good_times">ManageGoodTimes</string>
+    <string name="date">Date</string>
+    <string name="details">Details</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_view_all_good_times">ViewAllGoodTimes</string>
+</resources>

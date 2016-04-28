@@ -43,9 +43,7 @@ public class ViewAllGoodTimes extends ListActivity {
                     mode.finish();
                     return true;
                 case R.id.menu_delete:
-
                     Cursor cursor = (Cursor) list.getItemAtPosition(currentListItemIndex);
-
                     String id = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
 
                     dbHelperWrite.openForWriting();
@@ -53,7 +51,7 @@ public class ViewAllGoodTimes extends ListActivity {
                     dbHelperWrite.close();
 
                     dataAdapter.notifyDataSetChanged();
-                    Toast.makeText(ViewAllGoodTimes.this, "Good Time deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewAllGoodTimes.this, "Good Time Deleted", Toast.LENGTH_SHORT).show();
                     mode.finish();
                     return true;
                 default:

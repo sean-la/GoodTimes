@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class HomeScreen extends AppCompatActivity {
 
+    private DbAdapter dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,5 +72,6 @@ public class HomeScreen extends AppCompatActivity {
         Intent intent = new Intent(HomeScreen.this, ViewAllGoodTimes.class);
         startActivity(intent);
     }
+
 
 }

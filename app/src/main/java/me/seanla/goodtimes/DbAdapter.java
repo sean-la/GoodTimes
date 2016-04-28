@@ -52,20 +52,20 @@ public class DbAdapter {
     }
 
     public DbAdapter openForWriting() throws SQLException {
-        this.mDbHelper = new DbHelper(mCtx);
-        this.mDb = this.mDbHelper.getWritableDatabase();
+        mDbHelper = new DbHelper(mCtx);
+        mDb = this.mDbHelper.getWritableDatabase();
         return this;
     }
 
     public DbAdapter openForReading() throws SQLException {
-        this.mDbHelper = new DbHelper(mCtx);
-        this.mDb = this.mDbHelper.getReadableDatabase();
+        mDbHelper = new DbHelper(mCtx);
+        mDb = this.mDbHelper.getReadableDatabase();
         return this;
     }
 
     public void close() {
-        if (this.mDbHelper != null) {
-            this.mDbHelper.close();
+        if (mDbHelper != null) {
+            mDbHelper.close();
         }
     }
 
@@ -73,30 +73,26 @@ public class DbAdapter {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_DATE, date);
         initialValues.put(KEY_EVENT, goodTime);
-        return this.mDb.insert(SQLITE_TABLE, null, initialValues);
+        return mDb.insert(SQLITE_TABLE, null, initialValues);
     }
 
     public void deleteGoodTime(String id) {
-        this.mDb.beginTransaction();
-
         try {
-            this.mDb.delete(SQLITE_TABLE, KEY_ROWID + " = " + id, null);
+            mDb.delete(SQLITE_TABLE, KEY_ROWID + "=" + id, null);
         } catch (Exception e) {
             // Put logging system?
-        } finally {
-            this.mDb.endTransaction();
         }
     }
 
     public String getRandomGoodTime() {
         String goodTime;
 
-        Cursor numCursor = this.mDb.rawQuery("SELECT count(*) FROM GoodTimes", null);
+        Cursor numCursor = mDb.rawQuery("SELECT count(*) FROM GoodTimes", null);
         numCursor.moveToFirst();
         int numPosts = numCursor.getInt(0);
 
         if (numPosts > 0) {
-            Cursor cursor = this.mDb.rawQuery("SELECT * FROM GoodTimes ORDER BY RANDOM() LIMIT 1", null);
+            Cursor cursor = mDb.rawQuery("SELECT * FROM GoodTimes ORDER BY RANDOM() LIMIT 1", null);
             cursor.moveToFirst();
 
             String date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_DATE));
@@ -115,7 +111,7 @@ public class DbAdapter {
     }
 
     public Cursor fetchAllGoodTimes() {
-        Cursor mCursor = this.mDb.query(SQLITE_TABLE,new String[] {KEY_ROWID, KEY_DATE, KEY_EVENT},
+        Cursor mCursor = mDb.query(SQLITE_TABLE,new String[] {KEY_ROWID, KEY_DATE, KEY_EVENT},
                 null, null, null, null, null);
 
         if (mCursor != null) {

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:paddingTop="64dp"
+        android:paddingTop="32dp"
         android:onClick="getGoodTime"/>
 
     <Button

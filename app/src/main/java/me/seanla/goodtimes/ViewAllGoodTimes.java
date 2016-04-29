@@ -1,6 +1,7 @@
 package me.seanla.goodtimes;
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +18,10 @@ import android.widget.Toast;
 public class ViewAllGoodTimes extends ListActivity {
     private DbAdapter dbHelperRead;
     private DbAdapter dbHelperWrite;
-    private SimpleCursorAdapter dataAdapter;
     private ListView list;
     private int currentListItemIndex;
     private ActionMode currentActionMode;
+
 
     private ActionMode.Callback modeCallBack = new ActionMode.Callback() {
         @Override
@@ -38,10 +39,6 @@ public class ViewAllGoodTimes extends ListActivity {
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch(item.getItemId()) {
-                case R.id.menu_edit:
-                    Toast.makeText(ViewAllGoodTimes.this, "Editing!", Toast.LENGTH_SHORT).show();
-                    mode.finish();
-                    return true;
                 case R.id.menu_delete:
                     Cursor cursor = (Cursor) list.getItemAtPosition(currentListItemIndex);
                     String id = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
@@ -50,9 +47,8 @@ public class ViewAllGoodTimes extends ListActivity {
                     dbHelperWrite.deleteGoodTime(id);
                     dbHelperWrite.close();
 
-                    dataAdapter.notifyDataSetChanged();
-                    Toast.makeText(ViewAllGoodTimes.this, "Good Time Deleted", Toast.LENGTH_SHORT).show();
                     mode.finish();
+                    displayListView();
                     return true;
                 default:
                     return false;
@@ -91,7 +87,7 @@ public class ViewAllGoodTimes extends ListActivity {
                 R.id.details
         };
 
-        dataAdapter = new SimpleCursorAdapter(
+        SimpleCursorAdapter dataAdapter = new SimpleCursorAdapter(
                 this, R.layout.goodtime_info,
                 cursor,
                 columns,

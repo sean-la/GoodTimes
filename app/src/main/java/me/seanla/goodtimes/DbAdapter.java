@@ -69,10 +69,10 @@ public class DbAdapter {
         }
     }
 
-    public long insertGoodTime(String date, String goodTime) {
+    public long insertGoodTime(String date, String details) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_DATE, date);
-        initialValues.put(KEY_EVENT, goodTime);
+        initialValues.put(KEY_EVENT, details);
         return mDb.insert(SQLITE_TABLE, null, initialValues);
     }
 
@@ -82,6 +82,13 @@ public class DbAdapter {
         } catch (Exception e) {
             // Put logging system?
         }
+    }
+
+    public int updateGoodTime(String id, String date, String details) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_DATE, date);
+        values.put(KEY_EVENT, details);
+        return mDb.update(SQLITE_TABLE, values, KEY_ROWID + "=" + id, null);
     }
 
     public String getRandomGoodTime() {

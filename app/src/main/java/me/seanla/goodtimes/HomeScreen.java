@@ -26,8 +26,6 @@ public class HomeScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(HomeScreen.this, AddNewGoodTime.class);
                 startActivity(intent);
             }
@@ -62,7 +60,7 @@ public class HomeScreen extends AppCompatActivity {
     public void getGoodTime(View view) {
         TextView GoodTime = (TextView) findViewById(R.id.random_good_time);
 
-        DbAdapter dbHelper = new DbAdapter(this);
+        dbHelper = new DbAdapter(this);
         dbHelper.openForReading();
         GoodTime.setText(dbHelper.getRandomGoodTime());
         dbHelper.close();
@@ -72,6 +70,5 @@ public class HomeScreen extends AppCompatActivity {
         Intent intent = new Intent(HomeScreen.this, ViewAllGoodTimes.class);
         startActivity(intent);
     }
-
 
 }

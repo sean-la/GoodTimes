@@ -22,4 +22,5 @@
         <activity android:name=".ViewAllGoodTimes"></activity>
     </application>
 
+    <receiver android:process=":remote" android:name="AlarmReceiver"></receiver>
 </manifest>
